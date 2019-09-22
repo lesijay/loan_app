@@ -1,0 +1,23 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: #f2f4f8;
+}
+.div1 {
+  height: 20vh;
+  background-color: #201d3a;
+  display: flex;
+  justify-content: center;
+  align-content: flex-end;
+}
+.cardcontn {
+  display: flex;
+  width: 50%;
+}
+.div1 img {
+  width: 180px;
+  height: 10vh;
+  margin: 10px;
+}

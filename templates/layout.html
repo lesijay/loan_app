@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Decapay {% block title %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/css/index.css" />
+    <link rel="stylesheet" href="../static/css/create.css" />
+    <link rel="stylesheet" href="../static/css/duepayment.css" />
+    <link rel="stylesheet" href="../static/css/history.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
+    <link rel="stylesheet" href="../static/css/register.css" />
+    <link rel="stylesheet" href="../static/css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="http://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <div>
+      <nav class="nav-container">
+        <div class="logo-container">
+          <a href="/"
+            ><img src="../static/images/logo.jpeg" alt="logo" class="logo"
+          /></a>
+        </div>
+        {% if session.user_id %}
+        <ul class="links-container">
+          <li><a class="navbar-brand" href="/profile">Portfolio</a></li>
+          <li><a class="navbar-brand" href="/duepayment">Repay</a></li>
+          <li><a class="navbar-brand" href="/history">History</a></li>
+          <li><a class="navbar-brand" href="/logout">Log Out</a></li>
+        </ul>
+        {% else %}
+        <ul class="links-container">
+          <li><a class="navbar-brand" href="/login">Log in</a></li>
+          <li><a class="navbar-brand" href="/register">Sign up</a></li>
+        </ul>
+        {% endif %}
+
+        <div class="bugger">
+          <i class="fa fa-bars"></i>
+        </div>
+      </nav>
+    </div>
+
+    <!-- add files -->
+    <main>
+      {% block main %}{% endblock %}
+    </main>
+    <script>
+      const buggerDOM = document.querySelector(".bugger");
+      const linksContainerDOM = document.querySelector(".links-container");
+      buggerDOM.addEventListener("click", () => {
+        linksContainerDOM.classList.toggle("showNav");
+      });
+    </script>
+  </body>
+</html>

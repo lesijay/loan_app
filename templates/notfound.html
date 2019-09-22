@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+- 404
+{% endblock %}
+{% block main %}
+<div class="parentdiv">
+  <div class="div1">
+  </div>
+  <div class="form-container mt-5">
+    <form class="login-form" style='text-align:center;' action="/create" method="POST">
+        <span style='font-size:100px;'>&#128557;</span>
+      <p class="heading">404 </p>
+      <p class="heading">{{details}} </p>
+      <button type="submit" class="btn btn-primary form-control form-inpt loginbtn">
+            <a class="nregistered" href="/">Go Back Home</a>
+          </button>
+     
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

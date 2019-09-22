@@ -1,0 +1,95 @@
+{% extends "layout.html" %} {% block title %} - loan history {% endblock %} {%
+block main %}
+
+<div class="parentdiv">
+  <div class="div1"></div>
+  <div class="cardcont">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Loan Values</h5>
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <td>Loan Amount</td>
+                  <td>{{ amountborrowed }}</td>
+                </tr>
+                <tr>
+                  <td>Interest Rate</td>
+                  <td>{{ activeLoan[0]["interestRate"] }}</td>
+                </tr>
+                <tr>
+                  <td>Loan Period in years</td>
+                  <td>{{ activeLoan[0]["loanPeriod"] }}</td>
+                </tr>
+                <tr>
+                  <td>Start date of Loan</td>
+                  <td>{{ activeLoan[0]["startdate"] }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Loan Summary</h5>
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <td>Monthly Payment</td>
+                  <td>{{ payment }}</td>
+                </tr>
+                <tr>
+                  <td>No of Payments</td>
+                  <td>{{ activeLoan[0]["loanPeriod"] }}</td>
+                </tr>
+                <tr>
+                  <td>Total Interest</td>
+                  <td>{{ totalInterest }}</td>
+                </tr>
+                <tr>
+                  <td>Total Cost of Loan</td>
+                  <td>{{ tbalance }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">PMT No</th>
+          <th scope="col">Payment Date</th>
+          <th scope="col">Begining Balance</th>
+          <th scope="col">Payment</th>
+          <th scope="col">Principal</th>
+          <th scope="col">Interest</th>
+          <th scope="col">Ending Balance</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for x in range(activeLoan[0]["loanPeriod"]) %}
+        <tr>
+          <td>{{ x + 1 }}</td>
+          <td>{{ repayments_details[x]["due_date"] }}</td>
+          <td>{{ repayments_details[x]["begining_balance"] }}</td>
+          <td>{{ payment }}</td>
+          <td>{{ repayments_details[0]["principal"] }}</td>
+          <td>{{ repayments_details[0]["interest"] }}</td>
+          <td>{{ repayments_details[x]["ending_balance"] }}</td>
+          <td>unconfirmed</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

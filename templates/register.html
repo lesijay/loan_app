@@ -1,0 +1,195 @@
+{% extends "layout.html" %} 
+{% block title %} 
+  - register 
+{% endblock %} 
+{% block main %}
+
+<div class="div1"></div>
+<div id="wrapper2" class="jumbotron col-md-12" style="padding: 0;">
+  <section
+    id="form-container"
+    class="jumbotron mt-5 col-md-7 shadow"
+    style="padding: 20px;"
+  >
+    {% if message %} 
+    {% if message[1] != " " %}
+
+    <div  class="alert alert-danger" style="margin: 0 auto; text-align: center" role="alert" >
+      <p>{{ message[1] }}</p>
+    </div>
+    {% elif message[0] != " " %}
+    <div class="alert alert-success" style="margin: 0 auto; text-align: center" role="alert" >
+      <p>{{ message[0] }}</p>
+    </div>
+    {% endif %} {% endif %}
+
+    <h3>Sign up</h3>
+    <form action="/register" method="post" id="form">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">First Name</label>
+          <input
+            type="text"
+            name="firstname"
+            class="form-control"
+            id="inputEmail4"
+            placeholder="First Name"
+            value="{{first}}"
+          required/>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Last Name</label>
+          <input
+            type="text"
+            name="lastname"
+            class="form-control"
+            id="inputEmail4"
+            placeholder="Last Name"
+            value="{{last}}"
+          required/>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Username</label>
+          <input
+            type="text"
+            id="user"
+            name="username"
+            class="form-control"
+            placeholder="username"
+            value="{{username}}"
+          required/>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Phone</label>
+          <input
+            type="tel"
+            name="phone"
+            class="form-control"
+            id="inputEmail4"
+            placeholder="Phone Number"
+            value="{{phone}}"
+          required/>
+        </div>
+        <div
+          class="alert container"
+          id="unavailable"
+          role="alert"
+          style="display:none; width: 100%; height: 50px; text-align: center"
+        >
+          <p id="text" style="width: 100%"></p>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Email</label>
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            id="inputEmail4"
+            placeholder="Email"
+            value="{{email}}"
+          required/>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="inputPassword4"
+            placeholder="Password"
+          required/>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="confirmation"
+            id="inputPassword5"
+            placeholder="Confirm Password"
+         required />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputState">Gender</label>
+          <select name="gender" id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="inputAddress">Address</label>
+          <input
+            name="address"
+            type="text"
+            class="form-control"
+            id="inputAddress"
+            placeholder="1234 Main St"
+            value="{{address}}"
+          />
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="inputState">State</label>
+          <select name="state" id="inputState" class="form-control">
+            <option value="" selected disabled>Choose state</option>
+            {% for state in message_get %}
+            <option value="{{ state['state'] }}">{{ state["state"] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="inputCity">City</label>
+          <select name="city" id="inputState" class="form-control">
+            <option value="" selected disabled> Choose city</option>
+            {% for obj in message_get %} {% for city in obj['cities'] %}
+            <option value="{{ city }}">{{ city }}</option>
+            {% endfor %} {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" id="btn1" class="btn btn-primary">Register</button>
+
+      <div id="link">
+        Already a user?<a href="/login"> <span>Sign in here</span></a>
+      </div>
+    </form>
+  </section>
+</div>
+<script>
+  $(document).ready(function() {
+    console.log("hey");
+    $("#user").on("keyup", function(e) {
+      let username = $(this).val();
+      console.log($(this).val());
+
+      jQuery.get(`/check?q=${username}`, function(data) {
+        console.log(data);
+
+        if (data["message"] == "True") {
+          $("#unavailable").removeClass("alert-success");
+          $("#unavailable").addClass("alert-danger");
+          $("#unavailable").show();
+          $("#text").html("username is not available");
+          $("#btn1").attr("disabled", true);
+          return false;
+        }
+        $("#unavailable").removeClass("alert-danger");
+        $("#unavailable").addClass("alert-success");
+        $("#unavailable").show();
+        $("#text").html("username is available");
+        $("#btn1").attr("disabled", false);
+
+        return false;
+      });
+      e.preventDefault();
+    });
+  });
+</script>
+{% endblock %}

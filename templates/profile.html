@@ -1,0 +1,56 @@
+{% extends "layout.html" %} {% block title %} - Profile {% endblock %} {% block
+main %}
+
+<div class="div1"></div>
+<div id="wrapper-3" class="container col-md-9">
+  <div id="pix-wrapper" class="jumbotron shadow ">
+    <div id="pix">
+      <h1 style="font-size:3rem; width: 100%; height: 100%; text-align: center">
+        <span>Hello <span style="font-size:50px;">&#128515;</span></span>
+        {{ userName }}
+      </h1>
+      <!-- <img src="/static/images/lesi.jpg" /> -->
+    </div>
+    <div class="custom-file col-md-3">
+      <input
+        type="file"
+        class="custom-file-input"
+        id="validatedCustomFile"
+        required
+      />
+      <label class="custom-file-label" for="validatedCustomFile"
+        >Change picture</label
+      >
+      <a href="#"><label>Edit profile</label></a
+      ><br />
+    </div>
+  </div>
+  <div id="content" class="jumbotron ">
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title">Deca Mini</h5>
+        <p class="card-text">₦100,000 - ₦300,000</p>
+        <p class="card-text">Interest rate: 3%</p>
+        <a href="/create?loantype=Decamini" class="btn btn-primary">Apply</a>
+      </div>
+    </div>
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title">Deca Flex</h5>
+        <p class="card-text">₦310,000 - ₦900,000</p>
+        <p class="card-text">Interest rate: 5%</p>
+        <a href="/create?loantype=Decaflex" class="btn btn-primary">Apply</a>
+      </div>
+    </div>
+    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title">Deca Large</h5>
+        <p class="card-text">₦910,000 - ₦2 Million</p>
+        <p class="card-text">Interest rate: 10%</p>
+        <a href="/create?loantype=Decalarge" class="btn btn-primary">Apply</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

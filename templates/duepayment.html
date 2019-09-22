@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+- payment
+{% endblock %}
+{% block main %}
+
+<div class="parentdiv">
+  <div class="div1">
+      
+  </div>
+  {% if message %}
+  <div  class="alert" style="margin: 0 auto; text-align: center; width:100%; height: 100%;" role="alert" >
+      <h3 class="bg-danger p-4">{{ message }}</h3>
+    </div>
+    {% endif %}
+  <div class="tbl">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Payment Due Date</th>
+          <th scope="col">Balance</th>
+          <th scope="col">Payment</th>
+          <th scope="col">Date Paid</th>
+          <th scope="col">Mode of Payment</th>
+          <th scope="col">Upload Proof</th>
+        </tr>
+      </thead>
+      <tbody>
+        <form action="/duepayment" method="POST">
+        <tr>
+          <td>{{  repayments_details[x]["due_date"] }}</td>
+          <td>{{ repayments_details[x]["begining_balance"]  }}</td>
+          <td>{{ activeLoan[0]["monthlyRepayment"] }}</td>
+          <td><input type="date" name="datepaid"></td>
+          <td>
+            <select name = "paymentproof">
+              <option selected disabled>Choose...</option>
+              <option value="banktransfer">Bank Transfer</option>
+              <option value="bankteller">Bank Teller</option>
+              <option value="cash">Cash</option>
+              <option value="cheque">Cheque</option>
+            </select></td>
+          <td><input type="text" placeholder="image url" name="imageUrl"></td>
+          <td><button type="submit" class="btn btn-dark">Pay </button></td>
+        </tr>
+       </form>
+        </tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+{% endblock %}
